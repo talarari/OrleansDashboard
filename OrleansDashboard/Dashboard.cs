@@ -81,6 +81,11 @@ namespace OrleansDashboard
                             .AddApplicationPart(typeof(DashboardController).GetTypeInfo().Assembly)
                             .AddJsonFormatters();
                     })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddMetrics(options => options.AddDefaultGlobalTags = false,
+                            typeof(Dashboard).Assembly.GetName());
+                    })
                     .Configure(app =>
                     {
                         if (credentials.HasValue())
